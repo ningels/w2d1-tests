@@ -36,4 +36,32 @@ class CaffeineTest < MiniTest::Test
     assert tsmf.empty?
     assert trevor.alertness > 0.9
   end
+#---------------------------------------
+# Adventure Mode
+# Chris' suggestion, espresso is a different class of coffee...
+  def test_humans_can_drink_espresso
+    izzy = Human.new "Izzy Espresso"
+    tsmf = Espresso.new "Espresso"
+    assert tsmf.full?
+             #the .send is option so this is like sherri.buy.send(tsmf)
+    izzy.buy tsmf
+    izzy.drink!
+    assert(izzy.alertness.between?(0.1, 0.40))
+    refute tsmf.full?
+    assert tsmf.empty?
+  end
+
+  def test_humans_can_drink_all_the_espresso
+    itty = Human.new "Itty"
+    tsmf = Espresso.new "Espresso"
+    itty.buy tsmf
+
+    1.times { itty.drink! }
+    assert tsmf.empty?
+    assert itty.alertness >= 0.4
+  end
+
+
+
+
 end

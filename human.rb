@@ -3,11 +3,9 @@ class Human
                 :alertness,
                 :cup
 
-  def initialize(name, alertness=0, type="", num_drinks=0)
+  def initialize(name, alertness=0)
     self.name = name
     self.alertness = alertness.to_f
-    puts "self #{self.name}"
-    puts self.alertness
 
   end
 
@@ -16,12 +14,17 @@ class Human
   end
 
   def drink!
-    self.alertness = alertness + 0.31
+        puts "in drink!"
+        puts self.inspect
+        puts self.cup.coffee_name
+    case self.cup.coffee_name
+      when "Triple Shot Mocha Frappuccino" then self.alertness = alertness + 0.31
+      when "Espresso" then self.alertness = alertness + 0.4
+      when "Tea" then self.alertness = alertness + 0.25
+    end
+
     self.cup.coffee_level = self.cup.coffee_level - 1
     puts self.inspect
-    puts self.cup.inspect
-
-
   end
 
   def has_coffee?
@@ -32,6 +35,5 @@ class Human
     alertness <= 0
 
   end
-
 
 end
